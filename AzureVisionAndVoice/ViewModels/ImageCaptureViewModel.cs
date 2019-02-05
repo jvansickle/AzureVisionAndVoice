@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using AzureVisionAndVoice.Models;
+using System.IO;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Forms;
@@ -11,6 +13,7 @@ namespace AzureVisionAndVoice.ViewModels
     {
         public event Action<ImageSource, IEnumerable<ImageTag>> ImageAnalyzed;
 
+        MediaFile _photo;
         ImageSource _imageSource;
         public ImageSource ImageSource
         {
@@ -31,7 +34,7 @@ namespace AzureVisionAndVoice.ViewModels
                 {
                     _takePhoto = new Command(async () =>
                     {
-                        var photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                        _photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                         {
                             DefaultCamera = CameraDevice.Rear,
                             PhotoSize = PhotoSize.MaxWidthHeight,
@@ -39,8 +42,8 @@ namespace AzureVisionAndVoice.ViewModels
                             ModalPresentationStyle = MediaPickerModalPresentationStyle.OverFullScreen
                         });
 
-                        if (photo != null)
-                            ImageSource = ImageSource.FromStream(photo.GetStream);
+                        if (_photo != null)
+                            ImageSource = ImageSource.FromStream(_photo.GetStream);
                     });
                 }
 
@@ -57,13 +60,13 @@ namespace AzureVisionAndVoice.ViewModels
                 {
                     _selectPhoto = new Command(async () =>
                     {
-                        var photo = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                        _photo = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
                         {
                             ModalPresentationStyle = MediaPickerModalPresentationStyle.OverFullScreen
                         });
 
-                        if (photo != null)
-                            ImageSource = ImageSource.FromStream(photo.GetStream);
+                        if (_photo != null)
+                            ImageSource = ImageSource.FromStream(_photo.GetStream);
                     });
                 }
 
@@ -78,11 +81,34 @@ namespace AzureVisionAndVoice.ViewModels
             {
                 if (_analyzeImage == null)
                 {
-                    _analyzeImage = new Command(() =>
+                    _analyzeImage = new Command(async () =>
                     {
                         // TODO Communicate with Azure
+                        var subscriptionKey = "<key here>";
 
-                        ImageAnalyzed?.Invoke(ImageSource, new List<ImageTag> { new ImageTag { Name = "Image", Confidence = .1 } });
+                        // Specify the features to return
+                        List<VisualFeatureTypes> features = new List<VisualFeatureTypes> { VisualFeatureTypes.Tags };
+
+                        ComputerVisionClient computerVision = new ComputerVisionClient(
+                            new ApiKeyServiceClientCredentials(subscriptionKey),
+                            new System.Net.Http.DelegatingHandler[] { })
+                        {
+
+                            // You must use the same region as you used to get your subscription
+                            // keys. For example, if you got your subscription keys from westus,
+                            // replace "westcentralus" with "westus".
+
+                            // Specify the Azure region
+                            Endpoint = "https://eastus.api.cognitive.microsoft.com"
+                        };
+
+                        // Analyze Images
+                        using (Stream imageStream = _photo.GetStream())
+                        {
+                            var analysis = await computerVision.AnalyzeImageInStreamAsync(imageStream, features);
+
+                            ImageAnalyzed?.Invoke(ImageSource, analysis.Tags);
+                        }
                     });
                 }
 

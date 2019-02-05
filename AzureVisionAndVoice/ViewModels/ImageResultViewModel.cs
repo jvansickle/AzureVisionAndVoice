@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using AzureVisionAndVoice.Models;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Xamarin.Forms;
 
 namespace AzureVisionAndVoice.ViewModels

@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using AzureVisionAndVoice.Models;
 using AzureVisionAndVoice.ViewModels;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
