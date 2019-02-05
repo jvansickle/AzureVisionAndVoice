@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AzureVisionAndVoice.Pages.ImageCapturePage"
+             Title="Image Capture">
+    
+    <ContentPage.Content>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Image Source="{Binding ImageSource}"/>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Command="{Binding TakePhoto}"
+                        Text="Take Photo"/>
+                
+                <Button Command="{Binding SelectPhoto}"
+                        Text="Select Photo"
+                        Grid.Column="1"/>
+                
+            </Grid>
+            
+        </Grid>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

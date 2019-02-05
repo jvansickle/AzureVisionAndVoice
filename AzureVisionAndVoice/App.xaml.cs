@@ -1,4 +1,4 @@
-﻿using System;
+﻿using AzureVisionAndVoice.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +11,7 @@ namespace AzureVisionAndVoice
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new ImageCapturePage();
         }
 
         protected override void OnStart()
