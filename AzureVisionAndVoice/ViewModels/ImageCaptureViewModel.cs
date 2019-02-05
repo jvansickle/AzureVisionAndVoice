@@ -1,4 +1,7 @@
-﻿using Plugin.Media;
+﻿using System;
+using System.Collections.Generic;
+using AzureVisionAndVoice.Models;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 
@@ -6,6 +9,8 @@ namespace AzureVisionAndVoice.ViewModels
 {
     public class ImageCaptureViewModel : ViewModel
     {
+        public event Action<ImageSource, IEnumerable<ImageTag>> ImageAnalyzed;
+
         ImageSource _imageSource;
         public ImageSource ImageSource
         {
@@ -63,6 +68,25 @@ namespace AzureVisionAndVoice.ViewModels
                 }
 
                 return _selectPhoto;
+            }
+        }
+
+        Command _analyzeImage;
+        public Command AnalyzeImage
+        {
+            get
+            {
+                if (_analyzeImage == null)
+                {
+                    _analyzeImage = new Command(() =>
+                    {
+                        // TODO Communicate with Azure
+
+                        ImageAnalyzed?.Invoke(ImageSource, new List<ImageTag> { new ImageTag { Name = "Image", Confidence = .1 } });
+                    });
+                }
+
+                return _analyzeImage;
             }
         }
     }

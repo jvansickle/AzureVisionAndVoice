@@ -1,4 +1,6 @@
-﻿using AzureVisionAndVoice.ViewModels;
+﻿using System.Collections.ObjectModel;
+using AzureVisionAndVoice.Models;
+using AzureVisionAndVoice.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
@@ -13,7 +15,23 @@ namespace AzureVisionAndVoice.Pages
 
             On<iOS>().SetUseSafeArea(true);
 
-            BindingContext = new ImageCaptureViewModel();
+            var vm = new ImageCaptureViewModel();
+            vm.ImageAnalyzed += (imageSource, tags) =>
+            {
+                var resultViewModel = new ImageResultViewModel
+                {
+                    ImageSource = imageSource,
+                    Tags = new ObservableCollection<ImageTag>(tags)
+                };
+                var resultPage = new ImageResultPage
+                {
+                    BindingContext = resultViewModel
+                };
+
+                Navigation.PushAsync(resultPage);
+            };
+
+            BindingContext = vm;
         }
     }
 }

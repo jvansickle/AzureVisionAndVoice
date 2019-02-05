@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AzureVisionAndVoice.Pages.ImageCapturePage"
+             xmlns:Converters="clr-namespace:AzureVisionAndVoice.Converters"
              Title="Image Capture">
-    
+
     <ContentPage.Content>
         
         <Grid>
@@ -18,6 +19,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
                 <Button Command="{Binding TakePhoto}"
@@ -27,10 +29,21 @@
                         Text="Select Photo"
                         Grid.Column="1"/>
                 
+                <Button Command="{Binding AnalyzeImage}"
+                        Text="Analyze"
+                        IsEnabled="{Binding ImageSource, Converter={StaticResource NonNullToBooleanConverter}}"
+                        Grid.Column="2"/>
+                
             </Grid>
             
         </Grid>
         
     </ContentPage.Content>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converters:NonNullToBooleanConverter x:Key="NonNullToBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
 </ContentPage>

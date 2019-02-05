@@ -11,7 +11,7 @@ namespace AzureVisionAndVoice
         {
             InitializeComponent();
 
-            MainPage = new ImageCapturePage();
+            MainPage = new NavigationPage(new ImageCapturePage());
         }
 
         protected override void OnStart()
