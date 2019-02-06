@@ -13,5 +13,10 @@ namespace AzureVisionAndVoice.Repositories
         {
             imageTagEntities.Add(new ImageTagEntity { Image = image, Tags = tags });
         }
+
+        public static IEnumerable<ImageTagEntity> GetAllImageTags()
+        {
+            return imageTagEntities.ToArray();
+        }
     }
 }

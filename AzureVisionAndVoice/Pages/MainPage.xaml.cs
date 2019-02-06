@@ -15,5 +15,11 @@ namespace AzureVisionAndVoice.Pages
             var page = new ImageCapturePage();
             await Navigation.PushModalAsync(new NavigationPage(page));
         }
+
+        async void OpenAnalysisResults(object sender, EventArgs args)
+        {
+            var page = new AnalysisResultsListPage();
+            await Navigation.PushModalAsync(new NavigationPage(page));
+        }
     }
 }

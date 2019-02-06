@@ -16,8 +16,12 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <Button Text="Analyze Image"
+            <Button Text="Analyze Image (Vision)"
                     Clicked="OpenAnalyzeImage"/>
+            
+            <Button Text="Previous Results (Vision)"
+                    Clicked="OpenAnalysisResults"
+                    Grid.Column="1"/>
             
         </Grid>
         
