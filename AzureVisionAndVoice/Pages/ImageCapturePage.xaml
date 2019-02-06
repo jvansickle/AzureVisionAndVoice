@@ -4,6 +4,15 @@
              x:Class="AzureVisionAndVoice.Pages.ImageCapturePage"
              xmlns:Converters="clr-namespace:AzureVisionAndVoice.Converters"
              Title="Image Capture">
+    
+    <ContentPage.ToolbarItems>
+        
+        <ToolbarItem Name="Cancel"
+                     Order="Primary"
+                     Clicked="CloseModalPage"
+                     Priority="1" />
+        
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         
@@ -34,6 +43,13 @@
                         IsEnabled="{Binding ImageSource, Converter={StaticResource NonNullToBooleanConverter}}"
                         Grid.Column="2"/>
                 
+            </Grid>
+            
+            <Grid Grid.RowSpan="2"
+                  IsVisible="{Binding Analyzing}"
+                  BackgroundColor="White"
+                  Opacity="0.6">
+                <ActivityIndicator IsRunning="true"/>
             </Grid>
             
         </Grid>

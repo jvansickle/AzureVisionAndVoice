@@ -26,6 +26,17 @@ namespace AzureVisionAndVoice.ViewModels
             }
         }
 
+        bool _isAnalyzing;
+        public bool Analyzing
+        {
+            get => _isAnalyzing;
+            set
+            {
+                _isAnalyzing = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         Command _takePhoto;
         public Command TakePhoto
         {
@@ -84,6 +95,7 @@ namespace AzureVisionAndVoice.ViewModels
                 {
                     _analyzeImage = new Command(async () =>
                     {
+                        Analyzing = true;
                         var assembly = IntrospectionExtensions.GetTypeInfo(typeof(ImageCaptureViewModel)).Assembly;
                         Stream stream = assembly.GetManifestResourceStream("AzureVisionAndVoice.Keys.ComputerVisionKey.txt");
                         string subscriptionKey;
@@ -113,6 +125,7 @@ namespace AzureVisionAndVoice.ViewModels
                         {
                             var analysis = await computerVision.AnalyzeImageInStreamAsync(imageStream, features);
 
+                            Analyzing = false;
                             ImageAnalyzed?.Invoke(ImageSource, analysis.Tags);
                         }
                     });

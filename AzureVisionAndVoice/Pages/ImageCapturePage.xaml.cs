@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using AzureVisionAndVoice.ViewModels;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Xamarin.Forms;
@@ -32,6 +33,11 @@ namespace AzureVisionAndVoice.Pages
             };
 
             BindingContext = vm;
+        }
+
+        async void CloseModalPage(object sender, EventArgs args)
+        {
+            await Navigation.PopModalAsync();
         }
     }
 }
