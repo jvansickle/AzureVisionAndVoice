@@ -17,11 +17,12 @@ namespace AzureVisionAndVoice.Pages
             On<iOS>().SetUseSafeArea(true);
 
             var vm = new ImageCaptureViewModel();
-            vm.ImageAnalyzed += (imageSource, tags) =>
+            vm.ImageAnalyzed += (image, tags) =>
             {
                 var resultViewModel = new ImageResultViewModel
                 {
-                    ImageSource = imageSource,
+                    Image = image,
+                    ImageSource = ImageSource.FromStream(image.GetStream),
                     Tags = new ObservableCollection<ImageTag>(tags)
                 };
                 var resultPage = new ImageResultPage

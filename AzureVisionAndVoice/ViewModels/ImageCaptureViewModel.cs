@@ -12,9 +12,9 @@ namespace AzureVisionAndVoice.ViewModels
 {
     public class ImageCaptureViewModel : ViewModel
     {
-        public event Action<ImageSource, IEnumerable<ImageTag>> ImageAnalyzed;
+        public event Action<MediaFile, IEnumerable<ImageTag>> ImageAnalyzed;
 
-        MediaFile _photo;
+        MediaFile _image;
         ImageSource _imageSource;
         public ImageSource ImageSource
         {
@@ -46,7 +46,7 @@ namespace AzureVisionAndVoice.ViewModels
                 {
                     _takePhoto = new Command(async () =>
                     {
-                        _photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                        _image = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                         {
                             DefaultCamera = CameraDevice.Rear,
                             PhotoSize = PhotoSize.MaxWidthHeight,
@@ -54,8 +54,8 @@ namespace AzureVisionAndVoice.ViewModels
                             ModalPresentationStyle = MediaPickerModalPresentationStyle.OverFullScreen
                         });
 
-                        if (_photo != null)
-                            ImageSource = ImageSource.FromStream(_photo.GetStream);
+                        if (_image != null)
+                            ImageSource = ImageSource.FromStream(_image.GetStream);
                     });
                 }
 
@@ -72,13 +72,13 @@ namespace AzureVisionAndVoice.ViewModels
                 {
                     _selectPhoto = new Command(async () =>
                     {
-                        _photo = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                        _image = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
                         {
                             ModalPresentationStyle = MediaPickerModalPresentationStyle.OverFullScreen
                         });
 
-                        if (_photo != null)
-                            ImageSource = ImageSource.FromStream(_photo.GetStream);
+                        if (_image != null)
+                            ImageSource = ImageSource.FromStream(_image.GetStream);
                     });
                 }
 
@@ -121,12 +121,12 @@ namespace AzureVisionAndVoice.ViewModels
                         };
 
                         // Analyze Images
-                        using (Stream imageStream = _photo.GetStream())
+                        using (Stream imageStream = _image.GetStream())
                         {
                             var analysis = await computerVision.AnalyzeImageInStreamAsync(imageStream, features);
 
                             Analyzing = false;
-                            ImageAnalyzed?.Invoke(ImageSource, analysis.Tags);
+                            ImageAnalyzed?.Invoke(_image, analysis.Tags);
                         }
                     });
                 }

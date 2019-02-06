@@ -28,6 +28,7 @@
     <Folder Include="Models\" />
     <Folder Include="Converters\" />
     <Folder Include="Keys\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\ImageTag.cs" />

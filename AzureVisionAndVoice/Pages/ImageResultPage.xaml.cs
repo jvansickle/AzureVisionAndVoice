@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using AzureVisionAndVoice.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
@@ -11,6 +12,19 @@ namespace AzureVisionAndVoice.Pages
             InitializeComponent();
 
             On<iOS>().SetUseSafeArea(true);
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            if (BindingContext is ImageResultViewModel vm)
+            {
+                vm.ResultSaved += async () =>
+                {
+                    await Navigation.PopModalAsync();
+                };
+            }
         }
     }
 }

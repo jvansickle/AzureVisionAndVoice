@@ -30,7 +30,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
-                <Button Text="Save"/>
+                <Button Text="Save Results"
+                        Command="{Binding SaveResult}"/>
                 
             </Grid>
             
