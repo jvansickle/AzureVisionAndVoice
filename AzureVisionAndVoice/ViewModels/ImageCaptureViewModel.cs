@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Plugin.Media;
@@ -83,8 +84,13 @@ namespace AzureVisionAndVoice.ViewModels
                 {
                     _analyzeImage = new Command(async () =>
                     {
-                        // TODO Communicate with Azure
-                        var subscriptionKey = "<key here>";
+                        var assembly = IntrospectionExtensions.GetTypeInfo(typeof(ImageCaptureViewModel)).Assembly;
+                        Stream stream = assembly.GetManifestResourceStream("AzureVisionAndVoice.Keys.ComputerVisionKey.txt");
+                        string subscriptionKey;
+                        using (var reader = new StreamReader(stream))
+                        {
+                            subscriptionKey = reader.ReadToEnd();
+                        }
 
                         // Specify the features to return
                         List<VisualFeatureTypes> features = new List<VisualFeatureTypes> { VisualFeatureTypes.Tags };

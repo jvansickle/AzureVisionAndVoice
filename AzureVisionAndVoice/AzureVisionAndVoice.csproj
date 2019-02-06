@@ -9,6 +9,14 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_iOS|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>__IOS__;TRACE;DEBUG;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <IntermediateOutputPath>obj\Debug\netstandard2.0</IntermediateOutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
@@ -19,8 +27,15 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
     <Folder Include="Converters\" />
+    <Folder Include="Keys\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\ImageTag.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Keys\ComputerVisionKey.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Keys\ComputerVisionKey.txt" />
   </ItemGroup>
 </Project>

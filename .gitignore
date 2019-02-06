@@ -29,6 +29,9 @@ test-results/
 Thumbs.db
 .vs/
 
+# Subscription and Access Keys
+Keys/
+
 # Mac bundle stuff
 *.dmg
 *.app
