@@ -16,12 +16,19 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <Button Text="Analyze Image (Vision)"
+            <Button Text="Analyze Image (Tags)"
                     Clicked="OpenAnalyzeImage"/>
             
-            <Button Text="Previous Results (Vision)"
+            <Button Text="Previous Results (Tags)"
                     Clicked="OpenAnalysisResults"
                     Grid.Column="1"/>
+            
+            <Grid Grid.ColumnSpan="2"
+                  IsVisible="{Binding Analyzing}"
+                  BackgroundColor="White"
+                  Opacity="0.6">
+                <ActivityIndicator IsRunning="true"/>
+            </Grid>
             
         </Grid>
         

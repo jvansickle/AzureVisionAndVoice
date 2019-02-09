@@ -1,18 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
+using AzureVisionAndVoice.CognitiveServices;
+using AzureVisionAndVoice.ViewModels;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
+using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Xamarin.Forms;
 
 namespace AzureVisionAndVoice.Pages
 {
     public partial class MainPage : ContentPage
     {
+        MainViewModel ViewModel => BindingContext as MainViewModel;
+
         public MainPage()
         {
             InitializeComponent();
+
+            BindingContext = new MainViewModel();
         }
 
         async void OpenAnalyzeImage(object sender, EventArgs args)
         {
             var page = new ImageCapturePage();
+            var vm = new ImageCaptureViewModel();
+            vm.ImageConfirmed += async (image) =>
+            {
+                // Have the progress indicator displayed
+                ViewModel.Analyzing = true;
+
+                // Close the ImageCapturePage
+                await Navigation.PopModalAsync();
+
+                // Do analysis and display results page
+                var analysis = await VisionTags.GetTagsAsync(image);
+                var resultViewModel = new ImageResultViewModel
+                {
+                    Image = image,
+                    ImageSource = ImageSource.FromStream(image.GetStream),
+                    Tags = new ObservableCollection<ImageTag>(analysis.Tags)
+                };
+                var resultPage = new ImageResultPage
+                {
+                    BindingContext = resultViewModel
+                };
+
+                await Navigation.PushAsync(resultPage);
+
+                // Hide the progress indicator
+                ViewModel.Analyzing = false;
+            };
+
+            page.BindingContext = vm;
             await Navigation.PushModalAsync(new NavigationPage(page));
         }
 

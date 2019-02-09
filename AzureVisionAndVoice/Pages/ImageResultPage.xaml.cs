@@ -22,7 +22,7 @@ namespace AzureVisionAndVoice.Pages
             {
                 vm.ResultSaved += async () =>
                 {
-                    await Navigation.PopModalAsync();
+                    await Navigation.PopAsync();
                 };
             }
         }
