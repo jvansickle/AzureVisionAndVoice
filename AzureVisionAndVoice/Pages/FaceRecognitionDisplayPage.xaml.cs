@@ -54,11 +54,18 @@ namespace AzureVisionAndVoice.Pages
             canvas.DrawBitmap(bitmap, rect);
 
             // Prep rectangle paint
-            var paint = new SKPaint
+            var rectPaint = new SKPaint
             {
                 Color = new SKColor(255, 0, 0),
                 IsStroke = true,
                 StrokeWidth = 2
+            };
+
+            // Prep text paint
+            var textPaint = new SKPaint
+            {
+                Color = new SKColor(255, 0, 0),
+                TextSize = 48
             };
 
             // Draw the face boxes
@@ -69,7 +76,12 @@ namespace AzureVisionAndVoice.Pages
                                              scale * face.FaceRectangle.Width,
                                              scale * face.FaceRectangle.Height);
 
-                canvas.DrawRect(faceRect, paint);
+                canvas.DrawRect(faceRect, rectPaint);
+
+                canvas.DrawText(ViewModel.Faces.IndexOf(face).ToString(),
+                                (scale * face.FaceRectangle.Left + x) + (scale * face.FaceRectangle.Width / 2),
+                                (scale * face.FaceRectangle.Top + y),
+                                textPaint);
             });
         }
     }

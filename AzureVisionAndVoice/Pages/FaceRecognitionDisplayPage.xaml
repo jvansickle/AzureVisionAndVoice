@@ -2,17 +2,82 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sk="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:converters="clr-namespace:AzureVisionAndVoice.Converters"
              x:Class="AzureVisionAndVoice.Pages.FaceRecognitionDisplayPage">
     
     <ContentPage.Content>
         
-        <Grid>
+        <Grid VerticalOptions="FillAndExpand">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             
             <sk:SKCanvasView x:Name="canvasView"
                              PaintSurface="OnCanvasViewPaintSurface"
                              VerticalOptions="FillAndExpand"/>
+            
+            <ListView ItemsSource="{Binding Faces}"
+                      Grid.Row="1"
+                      HasUnevenRows="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            
+                            <StackLayout Padding="10">
+                                
+                                <Grid ColumnSpacing="10"
+                                      RowSpacing="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Label Text="Face:"/>
+                                    <Label Text="{Binding ., Converter={StaticResource IndexOfConverter}, ConverterParameter=Faces}"
+                                           Grid.Column="1"/>
+                                    
+                                    <Label Text="Gender:"
+                                           Grid.Row="1"/>
+                                    <Label Text="{Binding FaceAttributes.Gender}"
+                                           Grid.Row="1"
+                                           Grid.Column="1"/>
+                                    
+                                    <Label Text="Age:"
+                                           Grid.Row="2"/>
+                                    <Label Text="{Binding FaceAttributes.Age}"
+                                           Grid.Row="2"
+                                           Grid.Column="1"/>
+                                    
+                                    <Label Text="Emotion:"
+                                           Grid.Row="3"/>
+                                    <Label Text="{Binding FaceAttributes.Emotion, Converter={StaticResource PrimaryEmotionConverter}}"
+                                           Grid.Row="3"
+                                           Grid.Column="1"/>
+                                </Grid>
+                                
+                            </StackLayout>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
                 
         </Grid>
     </ContentPage.Content>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IndexOfConverter x:Key="IndexOfConverter"/>
+            <converters:PrimaryEmotionConverter x:Key="PrimaryEmotionConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
 </ContentPage>
