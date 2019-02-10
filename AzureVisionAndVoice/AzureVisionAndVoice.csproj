@@ -18,9 +18,11 @@
     <IntermediateOutputPath>obj\Debug\netstandard2.0</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.3.0-preview" />
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision" Version="3.3.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
@@ -36,8 +38,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Keys\ComputerVisionKey.txt" />
+    <None Remove="Keys\FaceKey.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Keys\ComputerVisionKey.txt" />
+    <EmbeddedResource Include="Keys\FaceKey.txt" />
   </ItemGroup>
 </Project>

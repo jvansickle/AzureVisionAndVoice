@@ -16,5 +16,17 @@ namespace AzureVisionAndVoice.CognitiveServices
             }
             return subscriptionKey;
         }
+
+        public static string GetFaceKey()
+        {
+            var assembly = typeof(VisionTags).GetTypeInfo().Assembly;
+            Stream stream = assembly.GetManifestResourceStream("AzureVisionAndVoice.Keys.FaceKey.txt");
+            string subscriptionKey;
+            using (var reader = new StreamReader(stream))
+            {
+                subscriptionKey = reader.ReadToEnd();
+            }
+            return subscriptionKey;
+        }
     }
 }

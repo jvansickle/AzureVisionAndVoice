@@ -62,5 +62,39 @@ namespace AzureVisionAndVoice.Pages
             var page = new AnalysisResultsListPage();
             await Navigation.PushModalAsync(new NavigationPage(page));
         }
+
+        async void OpenAnalyzeFaces(object sender, EventArgs args)
+        {
+            var page = new ImageCapturePage();
+            var vm = new ImageCaptureViewModel();
+            vm.ImageConfirmed += async (image) =>
+            {
+                // Ensure activity indicator is displaying
+                ViewModel.Analyzing = true;
+
+                // Close Image Capture Page
+                await Navigation.PopModalAsync();
+
+                // TODO Call face detection service
+                var detectedFaces = await FaceDetection.ProcessImageAsync(image);
+
+                var resultPage = new FaceRecognitionDisplayPage();
+                var resultViewModel = new FaceRecognitionDisplayViewModel
+                {
+                    Faces = detectedFaces,
+                    Image = image
+                };
+
+                resultPage.BindingContext = resultViewModel;
+
+                await Navigation.PushAsync(resultPage);
+
+                ViewModel.Analyzing = false;
+            };
+
+            page.BindingContext = vm;
+
+            await Navigation.PushModalAsync(page);
+        }
     }
 }

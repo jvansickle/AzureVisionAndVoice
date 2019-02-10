@@ -33,9 +33,9 @@ namespace AzureVisionAndVoice.ViewModels
                         _image = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                         {
                             DefaultCamera = CameraDevice.Rear,
-                            PhotoSize = PhotoSize.MaxWidthHeight,
+                            PhotoSize = PhotoSize.Full,
                             SaveToAlbum = false,
-                            ModalPresentationStyle = MediaPickerModalPresentationStyle.OverFullScreen
+                            ModalPresentationStyle = MediaPickerModalPresentationStyle.FullScreen
                         });
 
                         if (_image != null)
