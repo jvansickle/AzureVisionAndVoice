@@ -83,6 +83,11 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\cloud.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\cloud.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\cloud.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\cloud.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\cloud.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

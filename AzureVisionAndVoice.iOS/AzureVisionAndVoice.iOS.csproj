@@ -119,42 +119,18 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
-      <Visible>false</Visible>
-    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-120pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-180pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-40pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-60pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-80pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-29pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-58pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-87pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-20pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-76pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-152pt.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\cloud-167pt.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

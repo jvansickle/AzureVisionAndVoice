@@ -4,6 +4,12 @@
              x:Class="AzureVisionAndVoice.Pages.MainPage"
              Title="Vision and Voice">
     
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="About"
+                     Clicked="OpenAbout"
+                     Order="Primary"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         
         <Grid>
@@ -13,7 +19,8 @@
             </Grid.ColumnDefinitions>
             
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
@@ -29,7 +36,7 @@
                     Grid.Row="1"/>
             
             <Grid Grid.ColumnSpan="2"
-                  Grid.RowSpan="2"
+                  Grid.RowSpan="3"
                   IsVisible="{Binding Analyzing}"
                   BackgroundColor="White"
                   Opacity="0.6">

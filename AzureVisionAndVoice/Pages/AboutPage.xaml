@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AzureVisionAndVoice.Pages.AboutPage"
+             Title="About">
+    <ContentPage.Content>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Label Text="Application by John VanSickle"
+                   HorizontalOptions="Center"
+                   Grid.Row="1"/>
+            
+            <Label Text="jwvansickle.com"
+                   HorizontalOptions="Center"
+                   Grid.Row="2"/>
+            
+            <Label FontSize="10"
+                   Text="Cloud icon made by Smashicons from www.flaticon.com"
+                   HorizontalOptions="Center"
+                   VerticalOptions="End"
+                   Grid.Row="3"/>
+            
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

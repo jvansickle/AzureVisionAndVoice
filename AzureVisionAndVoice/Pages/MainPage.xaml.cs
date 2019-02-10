@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Reflection;
 using AzureVisionAndVoice.CognitiveServices;
 using AzureVisionAndVoice.ViewModels;
-using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Xamarin.Forms;
 
@@ -94,7 +90,12 @@ namespace AzureVisionAndVoice.Pages
 
             page.BindingContext = vm;
 
-            await Navigation.PushModalAsync(page);
+            await Navigation.PushModalAsync(new NavigationPage(page));
+        }
+
+        async void OpenAbout(object sender, EventArgs args)
+        {
+            await Navigation.PushAsync(new AboutPage());
         }
     }
 }
