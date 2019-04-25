@@ -7,7 +7,7 @@ namespace AzureVisionAndVoice.CognitiveServices
     {
         public static string GetCognitiveKey()
         {
-            var assembly = typeof(VisionTags).GetTypeInfo().Assembly;
+            var assembly = typeof(VisionService).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream("AzureVisionAndVoice.Keys.ComputerVisionKey.txt");
             string subscriptionKey;
             using (var reader = new StreamReader(stream))
@@ -19,7 +19,7 @@ namespace AzureVisionAndVoice.CognitiveServices
 
         public static string GetFaceKey()
         {
-            var assembly = typeof(VisionTags).GetTypeInfo().Assembly;
+            var assembly = typeof(VisionService).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream("AzureVisionAndVoice.Keys.FaceKey.txt");
             string subscriptionKey;
             using (var reader = new StreamReader(stream))

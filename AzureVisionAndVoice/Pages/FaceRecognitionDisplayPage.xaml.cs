@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AzureVisionAndVoice.ViewModels;
+using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
@@ -82,6 +83,26 @@ namespace AzureVisionAndVoice.Pages
                                 (scale * face.FaceRectangle.Left + x) + (scale * face.FaceRectangle.Width / 2),
                                 (scale * face.FaceRectangle.Top + y),
                                 textPaint);
+
+                // If landmarks are present, draw them too!
+                if (face.FaceLandmarks != null)
+                {
+                    var landmarkPaint = new SKPaint
+                    {
+                        Color = new SKColor(255, 0, 0),
+                        StrokeWidth = 6
+                    };
+
+                    face.FaceLandmarks.GetType().GetProperties().ToList().ForEach(landmark =>
+                    {
+                        if (landmark.PropertyType == typeof(Coordinate))
+                        {
+                            var coord = (Coordinate)landmark.GetValue(face.FaceLandmarks);
+
+                            canvas.DrawPoint((float)(scale * coord.X + x), (float)(scale * coord.Y + y), landmarkPaint);
+                        }
+                    });
+                }
             });
         }
     }

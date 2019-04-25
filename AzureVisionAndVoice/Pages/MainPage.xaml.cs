@@ -31,12 +31,12 @@ namespace AzureVisionAndVoice.Pages
                 await Navigation.PopModalAsync();
 
                 // Do analysis and display results page
-                var analysis = await VisionTags.GetTagsAsync(image);
+                var tags = await VisionService.GetTagsAsync(image);
                 var resultViewModel = new ImageResultViewModel
                 {
                     Image = image,
                     ImageSource = ImageSource.FromStream(image.GetStream),
-                    Tags = new ObservableCollection<ImageTag>(analysis.Tags)
+                    Tags = new ObservableCollection<ImageTag>(tags)
                 };
                 var resultPage = new ImageResultPage
                 {

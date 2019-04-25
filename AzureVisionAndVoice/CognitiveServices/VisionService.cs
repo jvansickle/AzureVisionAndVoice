@@ -7,9 +7,9 @@ using Plugin.Media.Abstractions;
 
 namespace AzureVisionAndVoice.CognitiveServices
 {
-    public static class VisionTags
+    public static class VisionService
     {
-        public static async Task<ImageAnalysis> GetTagsAsync(MediaFile image)
+        public static async Task<IEnumerable<ImageTag>> GetTagsAsync(MediaFile image)
         {
             var subscriptionKey = CognitiveKey.GetCognitiveKey();
 
@@ -33,7 +33,7 @@ namespace AzureVisionAndVoice.CognitiveServices
             using (Stream imageStream = image.GetStream())
             {
                 var analysis = await computerVision.AnalyzeImageInStreamAsync(imageStream, features);
-                return analysis;
+                return analysis.Tags;
             }
         }
     }
